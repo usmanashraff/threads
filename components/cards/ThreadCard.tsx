@@ -3,11 +3,12 @@ import Link from 'next/link'
 
 import CommentRedirect from '../iconsActions/CommentRedirect'
 import LikeAction from '../iconsActions/LikeAction';
+import { formatDateString } from '@/lib/utils';
 interface props{
     key: string,
     id:string,
-    currentUserId:string | undefined,
-    parentId:string | null,
+    currentUserId?:string | undefined,
+    parentId?:string | null,
     content:string,
     author:{
         name:string,
@@ -45,6 +46,7 @@ const ThreadCard = ({
     
 }: props) => {  
     //console.log('likes bro',likes )
+   
 
   return (
     <article
@@ -105,8 +107,20 @@ const ThreadCard = ({
                 </div>
 
             </div>
+
+           
+
         </div>
+
+     
     </div>
+
+    {!isComment && community && (
+              <Link href={`/communities/${community.id}`} className='mt-5 flex items-center'>
+                <p className="text-subtle-medium text-gray-1">{formatDateString(createdAt)} - {community.name}</p>
+                <Image src={community.image} alt='community img' width={14} height={14} className='ml-1 rounded-full object-contain' />
+              </Link>
+            )}
 
 
 

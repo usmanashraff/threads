@@ -19,11 +19,13 @@ import { Textarea } from "../ui/textarea"
 import { createThread } from "@/lib/actions/thread.actions"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
+import { useOrganization } from "@clerk/nextjs"
 
 const PostThread = ({userId}: {userId: string}) => {
   const path = usePathname()
   const router = useRouter()
   const [isloading, setisloading] = useState(false)
+  const { organization } = useOrganization()
 
      // 1. Define your form.
   const form = useForm<z.infer<typeof threadValidation>>({
@@ -40,7 +42,7 @@ const PostThread = ({userId}: {userId: string}) => {
    await createThread({
       text: values.thread,
       author: userId,
-      communityId: null,
+      communityId: organization ? organization.id: null,
       path,
     })
     

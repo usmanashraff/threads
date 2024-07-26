@@ -1,5 +1,6 @@
 import { fetchUserPosts } from "@/lib/actions/thread.actions"
 import ThreadCard from "../cards/ThreadCard"
+import { fetchCommunityPosts } from "@/lib/actions/community.actions"
 
 const ThreadsTab = async({
     currentUserId,
@@ -14,9 +15,11 @@ const ThreadsTab = async({
     userName:string,
     userImage:string,
 }) => {
-    const result = await fetchUserPosts(accountId)
+    let result
+     result = await fetchUserPosts(accountId)
     if(!result)
         return <p className="text-light-2 text-small-regular">no post</p>
+    console.log(result)
 
   return (
     <div className="space-y-4 py-6">

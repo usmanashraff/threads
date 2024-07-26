@@ -1,5 +1,7 @@
 import AccountProfile from '@/components/forms/AccountProfile'
+import { fetchUser } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation';
 import React from 'react'
 
 const page = async() => {
@@ -11,7 +13,12 @@ const page = async() => {
   }
 
 
-  const userInfo = {}
+  if(!user )
+    return null
+  const userInfo = await fetchUser(user.id)
+
+  if(userInfo.onBoarded)
+    redirect('/')
   const userData = {
     id: user?.id,
     objectId: userInfo?._id,

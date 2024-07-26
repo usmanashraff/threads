@@ -53,14 +53,25 @@ export async function fetchCommunityDetails(id: string) {
   try {
     connectdb();
 
-    const communityDetails = await Community.findOne({ id }).populate([
-      "createdBy",
-      {
-        path: "members",
-        model: User,
-        select: "name username image _id id",
-      },
-    ]);
+    const communityDetails = await Community.findOne({ id })
+    .populate({
+      path:'createdBy',
+      model:User,
+      select: 'name id image username _id'
+    })
+    .populate({
+      path: 'members',
+      model:User,
+      select: 'name id image username _id'
+    })
+    // .populate([
+    //   "createdBy",
+    //   {
+    //     path: "members",
+    //     model: User,
+    //     select: "name username image _id id",
+    //   },
+    // ]);
 
     return communityDetails;
   } catch (error) {
@@ -142,7 +153,11 @@ export async function fetchCommunities({
       .sort(sortOptions)
       .skip(skipAmount)
       .limit(pageSize)
-      .populate("members");
+      .populate({
+        path: 'members',
+        model: User,
+        select: "name id _id image"
+      });
 
     // Count the total number of communities that match the search criteria (without pagination).
     const totalCommunitiesCount = await Community.countDocuments(query);
