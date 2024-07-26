@@ -4,18 +4,17 @@ import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation";
 
 const page = async() => {
-  let user;
+  let user = undefined
   try {
-    user = await currentUser();
+   user  = await currentUser()
+   if(!user)
+    redirect('/sign-in')
   } catch (error) {
     console.log(error)
   }
-  if(!user)
-    redirect('/sign-in')
-  const userInfo = await fetchUser(user.id)
-
+  const userInfo = await fetchUser(user?.id || "" )
   if(!userInfo?.onBoarded)
-    redirect('/onboarding')
+    return redirect('/onboarding')
 
   
   return (

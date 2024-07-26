@@ -8,18 +8,22 @@ const Home = async()=> {
  
   const result = await fetchPosts(1,30)
   let user = undefined
+  let userInfo = undefined
   try {
    user  = await currentUser()
-   if(!user)
+   if(user == null)
     redirect('/sign-in')
   } catch (error) {
     console.log(error)
   }
-  const userInfo = await fetchUser(user?.id || "" )
+  if(user == undefined || user == null)
+    redirect('/sign-in')
+  if(user !== undefined)
+    userInfo = await fetchUser(user?.id)
+  
   if(!userInfo?.onBoarded)
     return redirect('/onboarding')
  
-  
  
   return (
     <div>

@@ -5,9 +5,11 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 const page = async() => {
-  let user;
+  let user = undefined
   try {
    user  = await currentUser()
+   if(!user)
+    redirect('/sign-in')
   } catch (error) {
     console.log(error)
   }

@@ -11,10 +11,13 @@ const page = async() => {
   } catch (error) {
     console.log(error)
   }
-
-
-  if(!user )
+  if(user === null)
+    redirect('/sign-in')
+  
+  if(!user)
     return null
+ 
+
   const userInfo = await fetchUser(user.id)
 
   if(userInfo.onBoarded)

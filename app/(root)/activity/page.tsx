@@ -5,12 +5,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-const page = async() => {
-    const user = await currentUser();
-  if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded) redirect("/onboarding");
+const page = async() => {
+
+  let user;
+  try {
+    user = await currentUser();
+  } catch (error) {
+    console.log(error)
+  }
+  if(!user)
+    redirect('/sign-in')
+  const userInfo = await fetchUser(user.id)
+
+
+  if(!userInfo?.onBoarded)
+    redirect('/onboarding')
 
   const activity = await getActivity(userInfo?._id) ;
   const likedThreads = await getLikesActivity(userInfo?._id)
@@ -79,6 +89,7 @@ const page = async() => {
          <p className='!text-base-regular text-light-3'>No comments yet</p>
        )}
    </div>
+   
     </section>
   )
 }

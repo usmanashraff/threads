@@ -6,19 +6,27 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { communityTabs, profileTabs } from "@/constants";
+import { communityTabs } from "@/constants";
 import Image from "next/image";
 import { fetchCommunityDetails } from "@/lib/actions/community.actions";
 import CommunityThreadsTab from "@/components/shared/CommunityThreadsTab";
 import { fetchUser } from "@/lib/actions/user.actions";
 import MembersTab from "@/components/shared/MembersTab";
+import { redirect } from "next/navigation";
 
 const page = async({params}: {params: {id: string}}) => {
- 
-
-    const user = await currentUser()
-    const userInfo = await fetchUser(user.id)
-
+  let user;
+  try {
+   user  = await currentUser()
+   if(!user)
+    redirect('/sign-in')
+  } catch (error) {
+    console.log(error)
+  }
+  const userInfo = await fetchUser(user?.id || "" )
+  if(!userInfo?.onBoarded)
+    return redirect('/onboarding')
+  
     const details = await fetchCommunityDetails(params.id)
   return (
     <section>
