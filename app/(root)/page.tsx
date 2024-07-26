@@ -21,7 +21,7 @@ const Home = async()=> {
   if(user !== undefined)
     userInfo = await fetchUser(user?.id)
   
-  if(!userInfo?.onBoarded)
+  if(userInfo?.onBoarded === false)
     return redirect('/onboarding')
  
  

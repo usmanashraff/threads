@@ -97,10 +97,7 @@ const AccountProfile = ({user, btnTitle}: profileProps) => {
 
         setisloading(false)
         ref?.current?.complete();
-        if(pathname === '/profile/edit')
-          router.back()
-        else
-          router.push('/')
+          router.push('/profile')
         
        } catch (error) {
         console.log(error)

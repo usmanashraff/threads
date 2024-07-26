@@ -48,7 +48,7 @@ export default async function RootLayout({
                 {children}
               </div>
              </section>
-             <RightSideBar />
+             {/* <RightSideBar /> */}
           </main>
           <BottomBar />
         </body>
