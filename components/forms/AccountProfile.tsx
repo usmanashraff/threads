@@ -97,7 +97,7 @@ const AccountProfile = ({user, btnTitle}: profileProps) => {
 
         setisloading(false)
         ref?.current?.complete();
-          router.push('/profile')
+          router.push('/')
         
        } catch (error) {
         console.log(error)

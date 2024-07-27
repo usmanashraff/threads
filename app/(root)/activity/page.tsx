@@ -29,7 +29,9 @@ const page = async() => {
       <h4 className="head-text">Activity</h4>
       <div className="flex flex-col gap-5 mt-10 mb-10">
       <div className="likes">
-       <p className="text-light-1">likes</p>
+       {!likedThreads &&  <p className="text-light-1">Likes</p>}
+       
+
        {likedThreads.map((likedThread)=>(
         
         <Link key={likedThread?._id} href={`/thread/${likedThread._id}`}>
@@ -86,7 +88,7 @@ const page = async() => {
            ))}
          </>
        ) : (
-         <p className='!text-base-regular text-light-3'>No comments yet</p>
+         <p className='!text-base-regular text-light-3'>No Activity yet</p>
        )}
    </div>
    

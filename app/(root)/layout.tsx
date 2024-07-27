@@ -6,9 +6,7 @@ import TopBar from "@/components/shared/TopBar";
 import LeftSideBar from "@/components/shared/LeftSideBar";
 import RightSideBar from "@/components/shared/RightSideBar";
 import BottomBar from "@/components/shared/BottomBar";
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import { fetchUser } from "@/lib/actions/user.actions";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,19 +19,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  let user = undefined
-  try {
-   user  = await currentUser()
-   if(!user)
-    redirect('/sign-in')
-  } catch (error) {
-    console.log(error)
-  }
-  const userInfo = await fetchUser(user?.id || "" )
-  if(!userInfo?.onBoarded)
-    return redirect('/onboarding')
-
 
  
   return (
@@ -48,7 +33,7 @@ export default async function RootLayout({
                 {children}
               </div>
              </section>
-             {/* <RightSideBar /> */}
+             <RightSideBar />
           </main>
           <BottomBar />
         </body>

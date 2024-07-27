@@ -48,7 +48,7 @@ export async function updateUser({
         name,
         bio,
         image,
-        onboarded: true,
+        onBoarded: true,
       },
       { upsert: true }
     );
