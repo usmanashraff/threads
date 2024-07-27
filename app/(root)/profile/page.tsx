@@ -33,6 +33,7 @@ const page = async() => {
       username={userInfo.username}
       userBio={userInfo.bio}
       name={userInfo.name}
+      type='currentUser'
     />
 
 
@@ -56,7 +57,7 @@ const page = async() => {
       {profileTabs.map((tab)=>(
         <TabsContent key={tab.label} value={tab.value} className="w-full text-light-1">
           <ThreadsTab 
-             currentUserId={user?.id}
+             currentUserId={user?.id || ''}
              accountId={userInfo?.id}
              account_id={userInfo?._id}
              userName={userInfo?.name}

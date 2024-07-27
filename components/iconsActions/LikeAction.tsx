@@ -6,19 +6,19 @@ import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
 
 const LikeAction = ({threadId, userId}: {threadId:string, userId:string}) => {
     const pathname = usePathname()
-    const [isLiked, setisLiked] = useState<boolean>(false)
+    const [isLiked, setisLiked] = useState<boolean>()
     
-       useEffect(()=>{
-        const checkForLike = async()=>{
-            const isLike = await checkLike(threadId, userId)
-            if(isLike)
-                setisLiked(true)
-            else
-               setisLiked(false)
-        }
-        checkForLike()
-       }, [isLiked])
-    
+       
+        useEffect(()=>{
+            const checkForLike = async()=>{
+                const isLike = await checkLike(threadId, userId)
+                setisLiked(isLike)
+            }
+            checkForLike()
+        },[])
+       
+    console.log('this post is', isLiked)
+    console.log(userId == '66a47d023d165482f191eb99')
     
   return (
     isLiked ?

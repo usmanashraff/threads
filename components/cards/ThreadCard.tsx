@@ -58,12 +58,14 @@ const ThreadCard = ({
       <div className='flex w-full flex-1 flex-row gap-4'>
         <div className='flex flex-col items-center'>
         <Link href={`/profile/${author.id}`} className='relative h-11 w-11'>
-              <Image
+             <div className=" h-20 w-20 flex justify-center items-center overflow-hidden rounded-full">
+             <Image
                 src={author.image}
                 alt='user_community_image'
                 fill
-                className='cursor-pointer rounded-full'
+                className='cursor-pointer rounded-full object-cover'
               />
+             </div>
             </Link>
 
             <div className='thread-card_bar' />
@@ -98,7 +100,7 @@ const ThreadCard = ({
                         <p className='text-subtle-medium mt-1 text-gray-1'>{likes.length} {likes.length > 1 ? 'likes' : 'like'} </p>
                     )}
                     {comments.length > 0 && (
-                        <p className='text-subtle-medium mt-1 text-gray-1'>{comments.length} replies </p>
+                        <p className='text-subtle-medium mt-1 text-gray-1'>{comments.length}{comments.length == 1 ? ' reply': ' replies'} </p>
                     )}
                     </div>
                    

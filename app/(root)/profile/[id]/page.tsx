@@ -17,9 +17,18 @@ const page = async({params}: {params: {id: string}}) => {
   const userInfo = await fetchUser(params.id)
   if(!userInfo?.onBoarded)
     return redirect('/onboarding')
-  const user = await currentUser()
+  let user;
+  try {
+     user = await currentUser()
+     if(!user)
+       return null
+  } catch (error) {
+    console.log(error)
+  }
+  
   if(!user)
     return null
+  const currentUserInfo = await fetchUser(user.id)
   if(userInfo?.id === user?.id)
     redirect('/profile')
   return (
@@ -54,7 +63,7 @@ const page = async({params}: {params: {id: string}}) => {
       <ThreadsTab 
          currentUserId={user?.id}
          accountId={userInfo?.id}
-         account_id={userInfo?._id}
+         account_id={currentUserInfo?._id}
          userName={userInfo?.name}
          userImage={userInfo?.image}
       />

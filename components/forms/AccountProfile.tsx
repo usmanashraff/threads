@@ -27,11 +27,12 @@ interface profileProps {
         bio: string,
         image: string
     },
-    btnTitle: string
+    btnTitle: string,
+    redirectUrl?:string
 }
 
 
-const AccountProfile = ({user, btnTitle}: profileProps) => {
+const AccountProfile = ({user, btnTitle, redirectUrl}: profileProps) => {
     const [files, setfiles] = useState<File[]>([])
     const { startUpload } = useUploadThing("media")
     const pathname = usePathname();
@@ -97,6 +98,9 @@ const AccountProfile = ({user, btnTitle}: profileProps) => {
 
         setisloading(false)
         ref?.current?.complete();
+         if(redirectUrl === '/profile')
+           router.push(redirectUrl)
+          else
           router.push('/')
         
        } catch (error) {
@@ -110,7 +114,7 @@ const AccountProfile = ({user, btnTitle}: profileProps) => {
   return (
     <Form {...form}>
       <LoadingBar color='#877EFF' ref={ref} height={4} style={{ borderRadius: '10px' }} />
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-10 p-4">
 
         {/* profile photo */}
         <FormField
@@ -120,7 +124,9 @@ const AccountProfile = ({user, btnTitle}: profileProps) => {
             <FormItem className="flex items-center ">
               <FormLabel className="account-form_image-label">
                 {field.value ? (
-                    <Image src={field.value} alt="profile photo" width={96} height={96} priority className="rounded-full object-contain" />
+                    <div className="flex justify-center items-center w-20 h-20 rounded-full overflow-hidden">
+                      <Image src={field.value} alt="profile photo" width={96} height={96} priority className="object-cover" />
+                    </div>
                 ): (
                     <Image src='/assets/profile.svg' alt="profile photo" width={24} height={24} className="object-contain" />
                 )}

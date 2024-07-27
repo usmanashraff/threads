@@ -24,7 +24,9 @@ const UserCard = ({
         <article className={`user-card ${personType === 'admin' && 'bg-dark-2 p-3 rounded-lg'}`}>
     
     <div className="user-card_avatar">
-      <Image src={image} alt='profile' width={48} height={48} className="rounded-full" />
+    <div className="flex items-center justify-center rounded-full  overflow-hidden h-14 w-14">
+    <Image src={image} alt='profile' width={48} height={48} className="object-cover" />
+    </div>
       <div className="flex-1 text-ellipsis">
           <h4 className="text-base-semibold text-light-1">{name}</h4>
           <p className="text-small-medium text-gray-1">{username}</p>
