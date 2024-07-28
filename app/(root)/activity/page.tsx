@@ -39,13 +39,15 @@ const page = async() => {
             <>
             {liker.id !== userInfo.id && (
                <article className='activity-card'>
+               <div className="flex items-center justify-center rounded-full overflow-hidden  w-6 h-6">
                <Image
                  src={liker.image}
                  alt='user_logo'
-                 width={20}
-                 height={20}
-                 className='rounded-full object-cover'
+                 width={28}
+                 height={28}
+                 className='object-cover'
                />
+               </div>
                <p className='!text-small-regular text-light-1'>
                  <span className='mr-1 text-primary-500'>
                    {liker.name}
@@ -70,13 +72,15 @@ const page = async() => {
            {activity.map((activity) => (
              <Link key={activity._id} href={`/thread/${activity.parentId}`}>
                <article className='activity-card my-0'>
-                 <Image
-                   src={activity.author.image}
-                   alt='user_logo'
-                   width={20}
-                   height={20}
-                   className='rounded-full object-cover'
-                 />
+               <div className="flex items-center justify-center rounded-full overflow-hidden  w-6 h-6">
+               <Image
+                 src={activity.author.image}
+                 alt='user_logo'
+                 width={28}
+                 height={28}
+                 className='object-cover'
+               />
+               </div>
                  <p className='!text-small-regular text-light-1'>
                    <span className='mr-1 text-primary-500'>
                      {activity.author.name}

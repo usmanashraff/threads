@@ -1,3 +1,4 @@
+import SearchForm from '@/components/forms/SearchForm'
 import UserCard from '@/components/shared/UserCard'
 import { fetchUser, fetchUsers } from '@/lib/actions/user.actions'
 import { currentUser } from '@clerk/nextjs/server'
@@ -25,26 +26,7 @@ const page = async() => {
   })
   return (
     <section>
-      <h1 className="head-text">Search</h1>
-
-      <div className="mt-10 flex flex-col gap-9">
-        {result.users.length === 0 ? (
-          <p className="no-result">no users to show</p>
-        ): (
-          <>
-          {result.users.map((person)=>(
-            <UserCard 
-               key={person.id}
-               id={person.id}
-               username={person.username}
-               name={person.name}
-               image={person.image}
-               personType='user'
-            />
-          ))}
-          </>
-        )}
-      </div>
+       <SearchForm result={result.users} type='user' />
     </section>
   )
 }
