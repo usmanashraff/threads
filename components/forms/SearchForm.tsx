@@ -26,7 +26,7 @@ const SearchForm = ({result, type}: props) => {
             <div className="mt-10 flex flex-col gap-9">
               <>
               {result.filter((item)=>{
-                return item.name.toLowerCase().includes(search)
+                return item.name.toLowerCase().includes(search.toLowerCase())
               }).map((item)=>{
                 if(type === 'user')
                   return <UserCard 
