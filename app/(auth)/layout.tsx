@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import '../globals.css'
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     title: "Threads",
     description: "A nextJs 14 meta Threads application",

@@ -6,6 +6,10 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["mongoose", "@clerk/nextjs"]
   },
+  onDemandEntries: {
+    maxInactiveAge: 60 * 60 * 1000,
+    pagesBufferLength: 50,
+  },
   images: {
     remotePatterns: [
       {
@@ -33,3 +37,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
