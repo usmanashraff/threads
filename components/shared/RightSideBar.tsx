@@ -12,9 +12,10 @@ const RightSideBar = async() => {
   try {
    user = await currentUser()
    if(!user)
-    redirect('/sign-in')
+    return null
   } catch (error) {
     console.log(error)
+    return null
   }
   const result = await fetchUsers({
     userId: user?.id || '',

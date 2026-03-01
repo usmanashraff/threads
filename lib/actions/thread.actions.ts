@@ -19,7 +19,7 @@ export const createThread = async({
     path,
 }: props) =>{
 
-    connectdb();
+    await connectdb();
 
     try {
 
@@ -55,7 +55,7 @@ export const createThread = async({
 
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
-    connectdb()
+    await connectdb()
   
     // Calculate the number of posts to skip based on the page number and page size.
     const skipAmount = (pageNumber - 1) * pageSize;
@@ -100,7 +100,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
 
 
   export async function fetchThread(threadId: string) {
-    connectdb();
+    await connectdb();
   
     try {
       const thread = await Thread.findById(threadId)
@@ -154,7 +154,7 @@ export async function addCommentToThread({
   path:string}){
 
 
-    connectdb()
+    await connectdb()
     try {
       console.log('threadid',threadId)
        const orignalThread = await Thread.findById(threadId)
@@ -186,7 +186,7 @@ export async function addCommentToThread({
 
 export async function addLikeToThread(threadId:string, userId:string, pathname:string){
 
-  connectdb()
+  await connectdb()
 
   try {
     const orignalThread = await Thread.findById(threadId);
@@ -203,7 +203,7 @@ export async function addLikeToThread(threadId:string, userId:string, pathname:s
 }
 
 export async function checkLike(threadId:string,userId:string){
-  connectdb()
+  await connectdb()
 
   try {
     const thread = await Thread.findById(threadId)
@@ -220,7 +220,7 @@ export async function checkLike(threadId:string,userId:string){
 }
 
 export const removeLike = async(threadId:string, userId:string, pathname:string) =>{
-  connectdb()
+  await connectdb()
 
  
   try {
@@ -247,7 +247,7 @@ export const removeLike = async(threadId:string, userId:string, pathname:string)
 
 export const fetchUserPosts = async(userId:string)=>{
 
-  connectdb()
+  await connectdb()
 
   try {
     const threads = await User.findOne({id: userId}).

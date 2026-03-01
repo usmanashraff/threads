@@ -10,7 +10,7 @@ import Community from "../models/community.model";
 
 export async function fetchUser(userId: string) {
   try {
-    connectdb();
+    await connectdb();
 
     return await User.findOne({ id: userId }).populate({
       path: "communities",
@@ -39,7 +39,7 @@ export async function updateUser({
   image,
 }: Params): Promise<void> {
   try {
-    connectdb();
+    await connectdb();
 
     await User.findOneAndUpdate(
       { id: userId },
@@ -63,7 +63,7 @@ export async function updateUser({
 
 export async function fetchUserPosts(userId: string) {
   try {
-    connectdb();
+    await connectdb();
 
     // Find all threads authored by the user with the given userId
     const threads = await User.findOne({ id: userId }).populate({
@@ -108,7 +108,7 @@ export async function fetchUsers({
   sortBy?: SortOrder;
 }) {
   try {
-    connectdb();
+    await connectdb();
 
     // Calculate the number of users to skip based on the page number and page size.
     const skipAmount = (pageNumber - 1) * pageSize;
@@ -154,7 +154,7 @@ export async function fetchUsers({
 
 export async function getActivity(userId: string) {
   try {
-    connectdb();
+    await connectdb();
 
     // Find all threads created by the user
     const userThreads = await Thread.find({ author: userId });
@@ -183,7 +183,7 @@ export async function getActivity(userId: string) {
 
 
   export const getLikesActivity = async (userId:string)=>{
-    connectdb()
+    await connectdb()
 
     try {
       const likedThreads = await Thread.find({
